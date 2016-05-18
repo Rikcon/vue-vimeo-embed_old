@@ -1,6 +1,6 @@
 {
   "name": "vue-vimeo-embed",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vue.js and YouTube",
   "main": "lib/vue-vimeo-embed.js",
   "scripts": {
@@ -21,7 +21,6 @@
     "Vimeo",
     "vimeo",
     "embed"
-    
   ],
   "author": "Rikcon",
   "license": "MIT",
