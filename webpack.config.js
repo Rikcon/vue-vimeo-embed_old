@@ -7,8 +7,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: './lib',
-    filename: 'vue-youtube-embed.js',
-    library: 'VueYouTubeEmbed',
+    filename: 'vue-vimeo-embed.js',
+    library: 'VueVimeoEmbed',
     libraryTarget: 'umd',
     sourcePrefix: ''
   },
@@ -18,6 +18,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.BannerPlugin(`Vue YouTube Embed version ${version} under MIT License copyright ${new Date().getFullYear()} kaorun343`)
+    new webpack.BannerPlugin(`Vue Vimeo Embed version ${version} under MIT License copyright ${new Date().getFullYear()} Rikcon`)
   ]
 }

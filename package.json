@@ -1,11 +1,11 @@
 {
-  "name": "vue-youtube-embed",
-  "version": "0.4.0",
+  "name": "vue-vimeo-embed",
+  "version": "0.0.1",
   "description": "Vue.js and YouTube",
-  "main": "lib/vue-youtube-embed.js",
+  "main": "lib/vue-vimeo-embed.js",
   "scripts": {
     "lint": "eslint src/index.js",
-    "test": "karma start",
+    "test": "",
     "build": "webpack",
     "prepublish": "npm run build"
   },
@@ -18,10 +18,12 @@
   "keywords": [
     "Vue.js",
     "vue",
-    "YouTube",
-    "youtube"
+    "Vimeo",
+    "vimeo",
+    "embed"
+    
   ],
-  "author": "kaorun343",
+  "author": "Rikcon",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.5.1",
@@ -48,10 +50,10 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaorun343/vue-youtube-embed.git"
+    "url": "git+https://github.com/Rikcon/vue-vimeo-embed.git"
   },
   "bugs": {
-    "url": "https://github.com/kaorun343/vue-youtube-embed/issues"
+    "url": "https://github.com/Rikcon/vue-vimeo-embed/issues"
   },
-  "homepage": "https://github.com/kaorun343/vue-youtube-embed#readme"
+  "homepage": "https://github.com/Rikcon/vue-vimeo-embed#readme"
 }
