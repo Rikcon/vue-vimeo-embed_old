@@ -1,6 +1,6 @@
 {
   "name": "vue-vimeo-embed",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Vue.js and YouTube",
   "main": "lib/vue-vimeo-embed.js",
   "scripts": {
