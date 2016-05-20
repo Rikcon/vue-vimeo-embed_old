@@ -1,8 +1,8 @@
-'use strict'
+'use strict';
 
 if (!String.prototype.includes) {
     String.prototype.includes = function () {
-        'use strict'
+        'use strict';
         return String.prototype.indexOf.apply(this, arguments) !== -1
     }
 }
@@ -29,18 +29,18 @@ export const VimeoPlayer = {
         pid += 1;
         return {
             elementId: `vimeo-player-${pid}`,
-            src: '//player.vimeo.com/video/' + this.videoId + '/?api=1&player_id=' + `vimeo-player-${pid}`
+            src: '//player.vimeo.com/video/' + this.videoId + '/?api=1&player_id=' + `vimeo-player-${pid}`,
+            mypid: pid
         }
     },
     methods: {
-        setSize() {
-            // this.player.setSize(this.playerWidth || '640', this.playerHeight || '390')
+        setSize(width, height) {
+            this.playerWidth = width;
+            this.playerHeight = height;
         },
         update(videoId) {
-            this.player.api('loadVideo', videoId);
-            console.log(this.player.api('loadVideo', videoId));
+            this.src = '//player.vimeo.com/video/' + videoId + '/?api=1&player_id=' + `vimeo-player-${this.mypid}`;
             console.log('update fired');
-            // this.src = '//player.vimeo.com/video/' + this.videoId + '/?api=1&player_id=' + this.elementId;
         }
     },
     ready() {
@@ -84,10 +84,10 @@ export const VimeoPlayer = {
 export function install(Vue) {
     Vue.component('vimeo', VimeoPlayer);
 
-    const tag = document.createElement('script');
-    tag.src = "http://esells.incosm/assets/frooga.js";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    /*    const tag = document.createElement('script');
+     tag.src = "http://esells.incosm/assets/frooga.js";
+     const firstScriptTag = document.getElementsByTagName('script')[0];
+     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);*/
 }
 
 export default {

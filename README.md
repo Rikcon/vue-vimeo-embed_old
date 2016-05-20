@@ -85,7 +85,7 @@ The first argument is an instance of `YT.Player`.
 <div id="#app">
   <section>
     <h2>listening events</h2>
-    <youtube :video-id="videoId" @ready="ready" @playing="playing"></youtube>
+    <vimeo :video-id="videoId" @ready="ready" @playing="playing"></vimeo>
   </section>
   <section>
     <h2>add options</h2>
@@ -97,9 +97,9 @@ The first argument is an instance of `YT.Player`.
 ```js
 'use strict'
 import Vue from 'vue'
-import VueYouTubeEmbed from 'vue-youtube-embed'
+import VueVimeoEmbed from 'vue-youtube-embed'
 
-Vue.use(VueYouTubeEmbed)
+Vue.use(VueVimeoEmbed)
 
 const app = new Vue({
   el: '#app',
