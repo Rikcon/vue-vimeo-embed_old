@@ -1,10 +1,8 @@
-'use strict';
 
 if (!String.prototype.includes) {
     String.prototype.includes = function () {
-        'use strict';
-        return String.prototype.indexOf.apply(this, arguments) !== -1
-    }
+        return String.prototype.indexOf.apply(this, arguments) !== -1;
+    };
 }
 
 const events = {
@@ -20,7 +18,9 @@ const events = {
 let pid = 0;
 
 export const VimeoPlayer = {
-    props: ['playerHeight', 'playerWidth', 'videoId'],
+    props: {
+        playerHeight:{} , playerWidth:{} , videoId: { required: true }
+    },
     template: '<div><iframe :id="elementId" :src="src"  :width="playerWidth" :height="playerHeight" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>',
     watch: {
         videoId: 'update'
@@ -31,7 +31,7 @@ export const VimeoPlayer = {
             elementId: `vimeo-player-${pid}`,
             src: '//player.vimeo.com/video/' + this.videoId + '/?api=1&player_id=' + `vimeo-player-${pid}`,
             mypid: pid
-        }
+        };
     },
     methods: {
         setSize(width, height) {
@@ -40,8 +40,7 @@ export const VimeoPlayer = {
         },
         update(videoId) {
             this.src = '//player.vimeo.com/video/' + videoId + '/?api=1&player_id=' + `vimeo-player-${this.mypid}`;
-            console.log('update fired');
-        }
+        },
     },
     ready() {
         this.player = $f(this.elementId);
