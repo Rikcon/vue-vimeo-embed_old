@@ -1,8 +1,8 @@
 {
-  "name": "vue-hypercomments",
-  "version": "2.0.0",
-  "description": "Vue.js Hypercomments plugin",
-  "main": "lib/vue-hypercomments.js",
+  "name": "vue-vimeo-embed",
+  "version": "1.1.0",
+  "description": "Vue.js and YouTube",
+  "main": "lib/vue-vimeo-embed.js",
   "scripts": {
     "lint": "eslint src/index.js",
     "test": "",
@@ -18,9 +18,9 @@
   "keywords": [
     "Vue.js",
     "vue",
-    "hypercomments",
-    "Hypercomments",
-    "comments"
+    "Vimeo",
+    "vimeo",
+    "embed"
   ],
   "author": "Rikcon",
   "license": "MIT",
@@ -49,10 +49,10 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rikcon/vue-hypercomments.git"
+    "url": "git+https://github.com/Rikcon/vue-vimeo-embed.git"
   },
   "bugs": {
-    "url": "https://github.com/Rikcon/vue-hypercomments/issues"
+    "url": "https://github.com/Rikcon/vue-vimeo-embed/issues"
   },
-  "homepage": "https://github.com/Rikcon/vue-hypercomments#readme"
+  "homepage": "https://github.com/Rikcon/vue-vimeo-embed#readme"
 }

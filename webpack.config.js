@@ -1,14 +1,14 @@
-'use strict';
+'use strict'
 
-const webpack = require('webpack');
-const version = require('./package.json').version;
+const webpack = require('webpack')
+const version = require('./package.json').version
 
 module.exports = {
   entry: './src/index.js',
   output: {
     path: './lib',
-    filename: 'vue-hypercomments.js',
-    library: 'VueHypercomments',
+    filename: 'vue-vimeo-embed.js',
+    library: 'VueVimeoEmbed',
     libraryTarget: 'umd',
     sourcePrefix: ''
   },
@@ -18,6 +18,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.BannerPlugin(`Vue Hypercomments version ${version} under MIT License copyright ${new Date().getFullYear()} Rikcon`)
+    new webpack.BannerPlugin(`Vue Vimeo Embed version ${version} under MIT License copyright ${new Date().getFullYear()} Rikcon`)
   ]
-};
+}
