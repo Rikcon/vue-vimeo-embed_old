@@ -19,7 +19,7 @@ let pid = 0;
 
 export const VimeoPlayer = {
     props: {
-        playerHeight:{} , playerWidth:{} , videoId: { required: true }
+        playerHeight:{} , playerWidth:{} , videoId: { required: true }, autoplay: 0, loop:0
     },
     template: '<div><iframe :id="elementId" :src="src"  :width="playerWidth" :height="playerHeight" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>',
     watch: {
@@ -29,7 +29,7 @@ export const VimeoPlayer = {
         pid += 1;
         return {
             elementId: `vimeo-player-${pid}`,
-            src: '//player.vimeo.com/video/' + this.videoId + '/?api=1&player_id=' + `vimeo-player-${pid}`,
+            src: '//player.vimeo.com/video/' + this.videoId + '/?api=1&player_id=' + `vimeo-player-${pid}`+'&autoplay=' + this.autoplay + '&loop=' + this.loop,
             mypid: pid
         };
     },
