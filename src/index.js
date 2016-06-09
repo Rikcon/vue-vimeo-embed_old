@@ -1,94 +1,157 @@
+'use strict';
 
 if (!String.prototype.includes) {
     String.prototype.includes = function () {
+        'use strict';
         return String.prototype.indexOf.apply(this, arguments) !== -1;
     };
 }
 
-const events = {
-    0: 'ready',
-    1: 'loadProgress',
-    2: 'playProgress',
-    3: 'play',
-    5: 'pause',
-    6: 'finish',
-    7: 'seek'
-};
-
 let pid = 0;
 
+<<<<<<< HEAD
 export const VimeoPlayer = {
     props: {
         playerHeight:{} , playerWidth:{} , videoId: { required: true }, autoplay: 0, loop:0
+=======
+export const container = {
+    scripts: [],
+
+    run() {
+        this.scripts.forEach((callback) => {
+            callback(this.HC_API)
+        });
+        this.scripts = []
+>>>>>>> fe3751a0f4d893747de6ffedf762bad2429e41bf
     },
-    template: '<div><iframe :id="elementId" :src="src"  :width="playerWidth" :height="playerHeight" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>',
-    watch: {
-        videoId: 'update'
+
+    register(callback) {
+        if (this.HC_API) {
+            this.Vue.nextTick(() => {
+                callback(this.HC_API)
+            })
+        } else {
+            this.scripts.push(callback)
+        }
+    }
+};
+
+export const hypercomments = {
+    props: {
+        xid: {
+            default: ''
+        },
+        widget_id: {
+            required: true
+        },
+        append: {
+            default: ''
+        },
+        settings: {},
+        language: ''
+
     },
+    template: '<div :id="widget_dom_id"></div>',
+/*    watch: {
+        'xid': 'changeXid'
+    },*/
     data() {
         pid += 1;
         return {
+<<<<<<< HEAD
             elementId: `vimeo-player-${pid}`,
             src: '//player.vimeo.com/video/' + this.videoId + '/?api=1&player_id=' + `vimeo-player-${pid}`+'&autoplay=' + this.autoplay + '&loop=' + this.loop,
             mypid: pid
+=======
+            widget_dom_id: 'hypercomments_widget_' + pid,
+            mypid: pid,
+            HC_API: {},
+            test2: null
+>>>>>>> fe3751a0f4d893747de6ffedf762bad2429e41bf
         };
     },
     methods: {
-        setSize(width, height) {
-            this.playerWidth = width;
-            this.playerHeight = height;
-        },
-        update(videoId) {
-            this.src = '//player.vimeo.com/video/' + videoId + '/?api=1&player_id=' + `vimeo-player-${this.mypid}`;
-        },
+        changeXid(newXid, oldXid){
+            // let comment_div = vm.$el;
+
+        }
     },
-    ready() {
-        this.player = $f(this.elementId);
-        this.player.addEvent('ready', () => {
-            this.$emit('ready', this.player);
+    created() {
+        var vm = this;
+        if ("HC_LOAD_INIT" in window)return;
+        window.HC_LOAD_INIT = true;
 
-            this.player.addEvent('pause', () => {
-                this.$emit('pause', this.player)
-            });
+        var lang = 'ar';
+        if (vm.language.length) {
+            lang = vm.language;
+        } else {
+            lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+        }
 
-            this.player.addEvent('play', () => {
-                this.$emit('play', this.player)
-            });
+        var hcc = document.createElement("script");
+        hcc.type = "text/javascript";
+        hcc.async = true;
+        hcc.src = ("https:" == document.location.protocol ? "https" : "http")
+            + "://w.hypercomments.com/widget/hc/" + vm.widget_id + "/" + lang + "/widget.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hcc, s.nextSibling);
 
-            this.player.addEvent('finish', () => {
-                this.$emit('finish', this.player)
-            });
+        hcc.onload = function () {
+            console.log('script loaded');
+            container.HC_API = window.HC;
+            vm.HC_API = window.HC;
+            vm.$nextTick(() => {
+                container.run()
+            })
+        }
 
-            this.player.addEvent('playProgress', (data) => {
-                this.$emit('playprogress', this.player, data)
-            });
+    },
+    ready(){
+        let vm = this;
+        container.register((HC) => {
+            window._hcwp = window._hcwp || [];
+            _hcwp.push(Object.assign({
+                widget: "Stream",
+                append: vm.append.length ? vm.append : '#' + this.widget_dom_id,
+                widget_id: vm.widget_id,
+                callback(app, init) {
+                    vm.HC_API = window.HC;
+                    vm.$el.innerHTML = '';
+                    var _hcp = Object.assign({
+                        widget_id: vm.widget_id,
+                        xid: vm.xid,
+                        append: '#' + vm.widget_dom_id
+                    }, vm.settings);
 
-            this.player.addEvent('loadProgress', (data) => {
-                this.$emit('loadprogress', this.player, data)
-            });
+                    window.HC.widget("Stream", _hcp);
+                    vm.$emit('ready', app, init, comment_div);
+                }
+            }, this.settings));
 
-            this.player.addEvent('seek', (data) => {
-                this.$emit('seek', this.player, data)
+            vm.$watch('xid', function(newVal, oldVal){
+
+                console.log(newVal, oldVal);
+                vm.$el.innerHTML = '';
+                var _hcp = Object.assign({
+                    widget_id: vm.widget_id,
+                    xid: newVal,
+                    append: '#' + vm.widget_dom_id
+                }, vm.settings);
+
+                window.HC.widget("Stream", _hcp);
             });
-        });
+        })
     },
     beforeDestroy() {
-        if (this.player !== null) {
-            this.player.destroy()
-        }
-        delete this.player
+
+
     }
 };
 
 export function install(Vue) {
-    Vue.component('vimeo', VimeoPlayer);
-
-    /*    const tag = document.createElement('script');
-     tag.src = "http://esells.incosm/assets/frooga.js";
-     const firstScriptTag = document.getElementsByTagName('script')[0];
-     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);*/
+    Vue.component('hypercomments', hypercomments);
 }
 
 export default {
-    VimeoPlayer, install
-}
+    hypercomments, install
+};
